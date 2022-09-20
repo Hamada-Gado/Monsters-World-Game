@@ -1,0 +1,74 @@
+While the hero is on his journey to fight
+The Dark Lord, Zork, at his castle,
+monsters are hiding everywhere waiting
+for the hero to stop him, but it is hard for
+them to get into villages and mountains.
+The monsters don't love to stay beside each other,
+unless they are diagonal to each other.
+
+* Goblin (HP100) (Axe Attack)		10x
+* Gargoyle(HP150) (Claw Attack)	5x
+* Dragon(HP200) (Fireball Attack)	5x
+* Mines					5x
+* Zork(HP500) (Black Magic Attack)	1x
+
+<Preperations>
+* The players decide who will be the Game Master for
+this session. Using Rock, Papaer Scissors for example.
+* The Game Master has control over the monsters and
+Zork.
+* Before the game starts, the Game master must
+pinpoint the monsters' locations. (The Hero can never
+know).
+* You can't place monsters in the mountains or in
+villages.
+* Once the monster and mines are placed, they
+can't be moved.
+* You can't place monsters beside eachother, unless
+they are aligned diagonally!
+* If playing alone (1P) the computer will be the
+Game Master.
+
+<The Rules>
+* The number of hit-points the hero has
+depends on his level
+* The hero and Zork have a pair of dice of
+different colors, each of which is a different color.
+* The hero can never use just one die to move, and
+he or she cannot move diagonally.
+
+------------------ Battle System ------------------
+* When step into the same square eccoupied by
+a monster, Both the hero and Zork throw one die.
+The one who throws the highest number attacks first.
+* If both of them throw the same number, they will
+attack simultaneously. one die color represents the
+tens-digit, the other the ones-digit. The number
+rolled is deducted from the opponent's HP.
+This will continue until one loses all of their
+hit points.
+* If the hero throws a double number, it wkll result
+in a critical hit. Critical hits deduct 100 HP from
+the opponent and adds 100 HP to the hero's stats!
+This does not apply to any monsters or Zork.
+* When the hero defeats a monster, he or she throws
+the dice and adds the number to their HP.
+
+------------------- How to win -------------------
+* The hero needs to travel to Zork Zone and win
+the battle against Zork!
+* The Game Master needs to keep Zork alive until
+the hero is defeated!
+
+------------------- Other Rules -------------------
+* When the hero enters a village, his or her
+hit-points can be restored! But you can only visit
+each village one time.
+	Village A	200 HP
+	Village B	150 HP
+	Village C	100 HP
+* When the hero steps on a mine, they
+recieve 100 HP of damage.
+* The level of the hero:
+level		1	2	3
+HP		400	300	200
