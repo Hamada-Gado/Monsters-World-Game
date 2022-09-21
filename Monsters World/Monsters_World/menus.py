@@ -1,29 +1,75 @@
 import pygame, sys
 from pygame.locals import *
-from Monsters_World.button import Button
-from Monsters_World.constants import MAIN_MENU_BUTTON, WHITE, TITLE_FONT, BLACK, GREY
+from .constants import BLACK, INSTRUCTION_FONT, MAP_IMAGE, WHITE
 pygame.init()
 
-def main_menu(screen: pygame.Surface):
+def _1P(screen: pygame.Surface, clock: pygame.time.Clock, fps: int):
 
-    title = TITLE_FONT.render('Monsters World', True, BLACK, GREY)
-
-    _1p_button = Button(MAIN_MENU_BUTTON, 800, 300, '1P')
-    _2p_button = Button(MAIN_MENU_BUTTON, 800, 450, '2P')
-    instruction_button = Button(MAIN_MENU_BUTTON, 800, 600, 'INSTRUCTION')
-    quit_button = Button(MAIN_MENU_BUTTON, 800, 750, 'QUIT')
+    world = pygame.transform.scale(MAP_IMAGE, ((MAP_IMAGE.get_width()*800)//MAP_IMAGE.get_height(), 800))
 
     while True:
-        pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
-            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE) or (event.type == MOUSEBUTTONUP and quit_button.check_for_hovering(pos)):
+            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
 
         screen.fill(WHITE)
-        screen.blit(title, (460, 100))
-        _1p_button.update(screen, pos)
-        _2p_button.update(screen, pos)
-        instruction_button.update(screen, pos)
-        quit_button.update(screen, pos)
+        screen.blit(world, (0, 0))
         pygame.display.update()
+        
+
+
+def _2P(screen: pygame.Surface, clock: pygame.time.Clock, fps: int):
+
+    world = MAP_IMAGE
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
+                pygame.quit()
+                sys.exit()
+
+
+def instruction_menu(screen: pygame.Surface, clock: pygame.time.Clock, fps: int):
+
+    def write_instructions():
+        with open('Monsters_World\\Instruction.txt', 'r') as instructions:
+            instructions = instructions.read()
+        instructions = instructions.split('\n')
+        instruction = ''
+
+        for num, line in enumerate(instructions):
+            instruction = INSTRUCTION_FONT.render(line, True, WHITE)
+            screen.blit(instruction, (padding, padding + spacing*num - scrolling_pos))
+
+    spacing = 45
+    padding = 20
+    scrolling_pos = 0
+    scrolling_speed = 15
+    scrolling_limit = 10_000
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
+                if event.button == 4:
+                    if scrolling_pos <= 0:
+                        scrolling_pos = 0
+                    else:
+                        scrolling_pos -= scrolling_speed
+                    
+                if event.button == 5:
+                    if scrolling_pos >= scrolling_limit:
+                        scrolling_pos = scrolling_limit
+                    else:
+                        scrolling_pos += scrolling_speed
+            
+
+        screen.fill(BLACK)
+        write_instructions()
+        pygame.display.update()
+        clock.tick(fps)

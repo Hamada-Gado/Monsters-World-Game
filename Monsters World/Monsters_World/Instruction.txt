@@ -1,16 +1,25 @@
-While the hero is on his journey to fight
-The Dark Lord, Zork, at his castle,
-monsters are hiding everywhere waiting
-for the hero to stop him, but it is hard for
-them to get into villages and mountains.
-The monsters don't love to stay beside each other,
-unless they are diagonal to each other.
-
-* Goblin (HP100) (Axe Attack)		10x
-* Gargoyle(HP150) (Claw Attack)	5x
-* Dragon(HP200) (Fireball Attack)	5x
-* Mines					5x
-* Zork(HP500) (Black Magic Attack)	1x
+--------------------- The Story ---------------------
+Welcome to the Kingdom, Monsly, where the residents
+live in peace and lead calm lives surrounded by
+large plains of green grass. Where the birds soar
+through the air, and the wind glides through the clouds...
+But one day, the sky turned dark and a dark omen in
+the form of a shadow was cast over the land.
+The Dark Lord, Zork, had finally awakened after
+his long slumber
+The land had gone into a dark age of history. Since then,
+the kingdom has been known as...
+Monster World!
+The survivors, who have been living in fear, are
+now cursing their own existence. But one
+refuses to give up hope to the darkness!
+This one beacon of hope has raised his sword
+and has gone on a quest to defeat Zork.
+His goal:
+The source of all evil, the castle of the
+dark demon lord, Zork!!
+The heroic battle between the hero and
+darkness starts now!
 
 <Preperations>
 * The players decide who will be the Game Master for
@@ -20,14 +29,21 @@ Zork.
 * Before the game starts, the Game master must
 pinpoint the monsters' locations. (The Hero can never
 know).
+
+* Goblin (100 HP)  (Axe Attack)        10x
+* Gargoyle (150 HP)  (Claw Attack)     5x
+* Dragon (200 HP)  (Fireball Attack)   5x
+* Mines                                5x
+* Zork (500 HP)  (Black Magic Attack)  1x
+
 * You can't place monsters in the mountains or in
 villages.
 * Once the monster and mines are placed, they
 can't be moved.
 * You can't place monsters beside eachother, unless
 they are aligned diagonally!
-* If playing alone (1P) the computer will be the
-Game Master.
+* If you are playing alone (1P) the computer
+will be the Game Master.
 
 <The Rules>
 * The number of hit-points the hero has
@@ -64,11 +80,11 @@ the hero is defeated!
 * When the hero enters a village, his or her
 hit-points can be restored! But you can only visit
 each village one time.
-	Village A	200 HP
-	Village B	150 HP
-	Village C	100 HP
+      Village A   200 HP
+      Village B   150 HP
+      Village C   100 HP
 * When the hero steps on a mine, they
 recieve 100 HP of damage.
 * The level of the hero:
-level		1	2	3
-HP		400	300	200
+level       1     2     3
+HP          400   300   200
