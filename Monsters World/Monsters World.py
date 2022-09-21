@@ -3,6 +3,7 @@ from pygame.locals import *
 from Monsters_World.button import Button
 from Monsters_World.menus import _1P, _2P, instruction_menu
 from Monsters_World.constants import MAIN_MENU_BUTTON_IMAGE, WHITE, TITLE_FONT, BLACK, GREY, MAP_IMAGE
+from Monsters_World.game import Game
 pygame.init()
 
 
@@ -20,6 +21,7 @@ def main():
     _2p_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 450, '2P')
     instruction_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 600, 'INSTRUCTION')
     quit_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 750, 'QUIT')
+    game = Game(SCREEN, CLOCK, FPS)
 
     while True:
         pos = pygame.mouse.get_pos()
@@ -30,23 +32,23 @@ def main():
 
             if event.type == MOUSEBUTTONUP:
                 if _1p_button.check_for_hovering(pos):
-                    return _1P(SCREEN, CLOCK, FPS)
+                    return _1P(game)
                 if _2p_button.check_for_hovering(pos):
-                    return _2P(SCREEN, CLOCK, FPS)
+                    return _2P(game)
                 if instruction_button.check_for_hovering(pos):
-                    instruction_menu(SCREEN, CLOCK, FPS)
+                    instruction_menu(game)
 
-        SCREEN.fill(WHITE)
-        SCREEN.blit(title, (460, 100))
-        _1p_button.update(SCREEN, pos)
-        _2p_button.update(SCREEN, pos)
-        instruction_button.update(SCREEN, pos)
-        quit_button.update(SCREEN, pos)
+        game.screen.fill(WHITE)
+        game.screen.blit(title, (460, 100))
+        _1p_button.update(game.screen, pos)
+        _2p_button.update(game.screen, pos)
+        instruction_button.update(game.screen, pos)
+        quit_button.update(game.screen, pos)
         pygame.display.update()
-        CLOCK.tick(FPS)
+        game.clock.tick(game.fps)
            
 
 
 if __name__ == '__main__':
-    os.chdir(os.path.join(os.path.dirname(sys.argv[0])))
+    # os.chdir(os.path.join(os.path.dirname(sys.argv[0])))
     main()
