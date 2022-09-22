@@ -4,6 +4,21 @@ pygame.init()
 CARD_WIDTH = 200
 CARD_HEIGHT = 100
 
+BOX_SIZE = 45
+X_MARGIN = 162
+Y_MARGIN = 140
+
+MOVE = 'move'
+BATTLE = 'battle'
+ROLL = 'roll'
+
+START_ZONE = 'S'
+ZORK_ZONE = 'Z'
+VILLAGE_A = 'A'
+VILLAGE_B = 'B'
+VILLAGE_C = 'C'
+NOT_ACCESSIBLE = 'N'
+
 # RGB
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -16,6 +31,9 @@ INSTRUCTION_FONT = pygame.font.Font(None, 50)
 
 # Images
 MAIN_MENU_BUTTON_IMAGE = pygame.transform.scale(pygame.image.load('images\\button.png'), (400, 100))
+ROUND_BUTTON_GREEN = pygame.transform.scale(pygame.image.load('images\\round button green.png'), (400, 100))
+ROUND_BUTTON_BLUE = pygame.transform.scale(pygame.image.load('images\\round button blue.png'), (400, 100))
+ROUND_BUTTON_ORANGE = pygame.transform.scale(pygame.image.load('images\\round button orange.png'), (400, 100))
 MAP_IMAGE = pygame.image.load('images\\MonsterWorldMap.png')
 
 GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load('images\\Goblin.png'), (CARD_WIDTH, CARD_HEIGHT))

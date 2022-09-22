@@ -48,10 +48,11 @@ will be the Game Master.
 <The Rules>
 * The number of hit-points the hero has
 depends on his level
-* The hero and Zork have a pair of dice of
-different colors, each of which is a different color.
+* The hero and Zork have a pair of dice,
+of which each is a different color.
 * The hero can never use just one die to move, and
 he or she cannot move diagonally.
+* The hero cannot move across mountains.
 
 ------------------ Battle System ------------------
 * When step into the same square eccoupied by

@@ -15,10 +15,14 @@ def _1P(game: Game):
                 pygame.quit()
                 sys.exit()
 
+            if event.type == MOUSEBUTTONDOWN:
+                game.move_hero(pygame.mouse.get_pos())
+
         game.screen.fill(BLACK)
         game.screen.blit(world, (30, 30))
-        game.draw_hero(pos)
+        game.draw_hero(game.hero_pos)
         pygame.display.update()
+        
         game.clock.tick(game.fps)
         
 
