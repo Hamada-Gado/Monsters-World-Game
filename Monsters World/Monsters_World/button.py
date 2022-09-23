@@ -11,6 +11,8 @@ class Button:
         self.text_input = text_input
         self.text = self.font.render(self.text_input, True, "white")
         self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
+        self.color_main = 'white'
+        self.color_sub = 'green '
         self.enable = True
 
     def update(self, screen, position):
@@ -31,12 +33,6 @@ class Button:
 
     def change_color(self, position):
         if self.check_for_hovering(position):
-            self.text = self.font.render(self.text_input, True, "green")
+            self.text = self.font.render(self.text_input, True, self.color_sub)
         else:
-            self.text = self.font.render(self.text_input, True, "white")
-
-    def enable(self):
-        self.enable = True
-
-    def disable(self):
-        self.enable = False
+            self.text = self.font.render(self.text_input, True, self.color_main)

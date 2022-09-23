@@ -19,7 +19,7 @@ def main():
 
     _1p_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 300, '1P')
     _2p_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 450, '2P')
-    _2p_button.disable()
+    _2p_button.enable = False
     instruction_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 600, 'INSTRUCTION')
     quit_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 750, 'QUIT')
     game = Game(SCREEN, CLOCK, FPS)

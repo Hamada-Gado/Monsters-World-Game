@@ -1,0 +1,28 @@
+import sys
+import pygame
+pygame.init()
+
+screen = pygame.display.set_mode((400,400))
+
+while True:
+
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    pos = (100, 100)
+        
+    outer_frame = pygame.Rect(0, 0, 55, 55)
+    inner_frame = pygame.Rect(0, 0, 35, 35)
+    outer_frame.center = pos
+    inner_frame.center = pos
+    dots = []
+    dot = pygame.Rect(0, 0, 10, 10)
+    dot.center = pos
+
+    
+    screen.fill('red')
+    pygame.draw.rect(screen, 'green', outer_frame)
+    pygame.display.update()

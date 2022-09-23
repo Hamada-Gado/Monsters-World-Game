@@ -1,6 +1,6 @@
 from random import randint
 import pygame
-from .constants import BOX_SIZE, MOVE, NOT_ACCESSIBLE, RED, ROLL, START_ZONE, VILLAGE_A, VILLAGE_B, VILLAGE_C, X_MARGIN, Y_MARGIN, ZORK_ZONE
+from .constants import BOX_SIZE, DOT_RADIUS, MOVE, NOT_ACCESSIBLE, RED, ROLL, SPACING, START_ZONE, VILLAGE_A, VILLAGE_B, VILLAGE_C, X_MARGIN, Y_MARGIN, ZORK_ZONE
 pygame.init()
 
 class Game:
@@ -13,8 +13,8 @@ class Game:
         self.phase = None
         self.x, self.y = 16, 0
         self.hero_pos = self.center_coords_of_hero(self.x, self.y)
-        self.hero_dice = [None, None]
-        self.zork_dice = [None, None] 
+        self.hero_dice = [0, 0]
+        self.zork_dice = [0, 0] 
         self.create_world()
 
     def create_world(self):
@@ -67,26 +67,26 @@ class Game:
         if x == None or y == None or center == None or self.world[x][y] == NOT_ACCESSIBLE:
             return
 
-        if self.hero_dice[0] != None and abs(self.x - x) == self.hero_dice[0]:
-            self.hero_dice[0] = None
+        if self.hero_dice[0] != 0 and abs(self.x - x) == self.hero_dice[0] and self.y - y == 0:
+            self.hero_dice[0] = 0
             self.x, self.y = x, y
             self.hero_pos = center
             return
 
-        if self.hero_dice[1] != None and abs(self.x - x) == self.hero_dice[1]:
-            self.hero_dice[1] = None
+        elif self.hero_dice[1] != 0 and abs(self.x - x) == self.hero_dice[1] and self.y - y == 0:
+            self.hero_dice[1] = 0
             self.x, self.y = x, y
             self.hero_pos = center
             return
 
-        if self.hero_dice[0] != None and abs(self.y - y) == self.hero_dice[0]:
-            self.hero_dice[0] = None
+        elif self.hero_dice[0] != 0 and abs(self.y - y) == self.hero_dice[0] and self.x - x == 0:
+            self.hero_dice[0] = 0
             self.x, self.y = x, y
             self.hero_pos = center
             return
 
-        if self.hero_dice[1] != None and abs(self.y - y) == self.hero_dice[1]:
-            self.hero_dice[1] = None
+        elif self.hero_dice[1] != 0 and abs(self.y - y) == self.hero_dice[1] and self.x - x == 0:
+            self.hero_dice[1] = 0
             self.x, self.y = x, y
             self.hero_pos = center
             return
@@ -99,13 +99,81 @@ class Game:
         if self.hero_dice[0] == 4:
             self.hero_dice[0] = 1
         elif self.hero_dice[0] == 5:
-            self.hero_dice[0] = 5
+            self.hero_dice[0] = 2
         elif self.hero_dice[0] == 6:
             self.hero_dice[0] = 3
 
         if self.hero_dice[1] == 4:
             self.hero_dice[1] = 1
         elif self.hero_dice[1] == 5:
-            self.hero_dice[1] = 5
+            self.hero_dice[1] = 2
         elif self.hero_dice[1] == 6:
             self.hero_dice[1] = 3
+
+    def draw_die(self, num_dots, pos):
+
+        inner_frame = pygame.Rect(0, 0, SPACING*4 + DOT_RADIUS * 2*3, SPACING*4 + DOT_RADIUS * 2*3)
+        outer_frame = pygame.Rect(0, 0, inner_frame.w + 10, inner_frame.h + 10)
+        outer_frame.center = pos
+        inner_frame.center = pos
+        dots = []
+        if num_dots == 1:
+            dot1 = pygame.Rect(0, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot1.center = inner_frame.center
+            dots.append(dot1)
+        elif num_dots == 2:
+            dot1 = pygame.Rect(inner_frame.left + SPACING, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot1.centery = inner_frame.centery
+            dot2 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot2.centery = inner_frame.centery
+            dots.append(dot1)
+            dots.append(dot2)
+        elif num_dots == 3:
+            dot1 = pygame.Rect(inner_frame.left + SPACING, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot2 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot3 = pygame.Rect(0, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot3.center = pos
+            dots.append(dot1)
+            dots.append(dot2)
+            dots.append(dot3)
+        elif num_dots == 4:
+            dot1 = pygame.Rect(inner_frame.left + SPACING, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot2 = pygame.Rect(inner_frame.left + SPACING, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot3 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot4 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dots.append(dot1)
+            dots.append(dot2)
+            dots.append(dot3)
+            dots.append(dot4)
+        elif num_dots == 5:
+            dot1 = pygame.Rect(inner_frame.left + SPACING, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot2 = pygame.Rect(inner_frame.left + SPACING, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot3 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot4 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot5 = pygame.Rect(0, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot5.center = pos
+            dots.append(dot1)
+            dots.append(dot2)
+            dots.append(dot3)
+            dots.append(dot4)
+            dots.append(dot5)
+        elif num_dots == 6:
+            dot1 = pygame.Rect(inner_frame.left + SPACING, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot2 = pygame.Rect(inner_frame.left + SPACING, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot3 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.top + SPACING, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot4 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, inner_frame.bottom - SPACING - DOT_RADIUS * 2, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot5 = pygame.Rect(inner_frame.left + SPACING, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot5.centery = inner_frame.centery
+            dot6 = pygame.Rect(inner_frame.right - SPACING - DOT_RADIUS * 2, 0, DOT_RADIUS * 2, DOT_RADIUS * 2)
+            dot6.centery = inner_frame.centery
+            dots.append(dot1)
+            dots.append(dot2)
+            dots.append(dot3)
+            dots.append(dot4)
+            dots.append(dot5)
+            dots.append(dot6)
+
+        pygame.draw.rect(self.screen, 'green', outer_frame)
+        pygame.draw.rect(self.screen, 'black', inner_frame)
+        for dot in dots:
+            pygame.draw.circle(self.screen, 'red', dot.center, DOT_RADIUS)

@@ -52,6 +52,9 @@ depends on his level
 of which each is a different color.
 * The hero can never use just one die to move, and
 he or she cannot move diagonally.
+      If hero rolled 1 or 4 ---> move 1 space.
+      If hero rolled 2 or 5 ---> move 2 spaces.
+      If hero rolled 3 or 6 ---> move 3 spaces.
 * The hero cannot move across mountains.
 
 ------------------ Battle System ------------------

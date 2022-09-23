@@ -1,12 +1,14 @@
 import pygame, sys
 from pygame.locals import *
-from .constants import BLACK, INSTRUCTION_FONT, MAP_IMAGE, WHITE
+from .constants import BLACK, INSTRUCTION_FONT, MAP_IMAGE, ROUND_BUTTON_BLUE, ROUND_BUTTON_GREEN, ROUND_BUTTON_ORANGE, WHITE
 from .game import Game
+from .button import Button
 pygame.init()
 
 def _1P(game: Game):
 
     world = pygame.transform.scale(MAP_IMAGE, ((MAP_IMAGE.get_width()*800)//MAP_IMAGE.get_height(), 800))
+    roll_button = Button(ROUND_BUTTON_ORANGE, game.screen.get_width() - ROUND_BUTTON_ORANGE.get_width()//2 - 50, 100, 'ROLL')
 
     while True:
         pos = pygame.mouse.get_pos()
@@ -16,10 +18,15 @@ def _1P(game: Game):
                 sys.exit()
 
             if event.type == MOUSEBUTTONDOWN:
-                game.move_hero(pygame.mouse.get_pos())
+                game.move_hero(event.pos)
 
-        game.screen.fill(BLACK)
+                if roll_button.check_for_hovering(event.pos):
+                    game.throw_dice()
+
+        game.screen.fill('purple')
         game.screen.blit(world, (30, 30))
+        roll_button.update(game.screen, pos)
+        print(game.hero_dice)
         game.draw_hero(game.hero_pos)
         pygame.display.update()
         
