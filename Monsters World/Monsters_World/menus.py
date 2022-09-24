@@ -1,35 +1,36 @@
 import pygame, sys
 from pygame.locals import *
-from .constants import BLACK, INSTRUCTION_FONT, MAP_IMAGE, ROUND_BUTTON_BLUE, ROUND_BUTTON_GREEN, ROUND_BUTTON_ORANGE, WHITE
+from .constants import BATTLE, BLACK, BLUE, GAME_FONT, GREY, INSTRUCTION_FONT, MAIN_MENU_BUTTON_IMAGE, MAP_IMAGE, MOVE, PURPLE, ROLL, ROUND_BUTTON_ORANGE, TITLE_FONT, WHITE
 from .game import Game
 from .button import Button
 pygame.init()
 
 def _1P(game: Game):
 
-    world = pygame.transform.scale(MAP_IMAGE, ((MAP_IMAGE.get_width()*800)//MAP_IMAGE.get_height(), 800))
-    roll_button = Button(ROUND_BUTTON_ORANGE, game.screen.get_width() - ROUND_BUTTON_ORANGE.get_width()//2 - 50, 100, 'ROLL')
+    game.create_world()
 
     while True:
-        pos = pygame.mouse.get_pos()
+
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
 
             if event.type == MOUSEBUTTONDOWN:
-                game.move_hero(event.pos)
+                result = game.move_hero(event.pos)
+                if result == False:
+                    return lose_menu(game)
+                elif result == True:
+                    return win_menu(game)
 
-                if roll_button.check_for_hovering(event.pos):
-                    game.throw_dice()
+                if game.roll_button.check_for_hovering(event.pos) and game.phase == ROLL:
+                    game.throw_hero_dice()
+                    if game.phase != BATTLE:
+                        game.phase = MOVE
+                        game.get_num_moves()
 
-        game.screen.fill('purple')
-        game.screen.blit(world, (30, 30))
-        roll_button.update(game.screen, pos)
-        print(game.hero_dice)
-        game.draw_hero(game.hero_pos)
+        game.update(pygame.mouse.get_pos())
         pygame.display.update()
-        
         game.clock.tick(game.fps)
         
 
@@ -90,4 +91,66 @@ def instruction_menu(game: Game):
         game.screen.fill(BLACK)
         write_instructions()
         pygame.display.update()
+
         game.clock.tick(game.fps)
+
+def choose_level(game: Game):
+
+    level1_button = Button(MAIN_MENU_BUTTON_IMAGE, 300, 300, 'Level 1: HP = 400')
+    level2_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 300, 'Level 2: HP = 300')
+    level3_button = Button(MAIN_MENU_BUTTON_IMAGE, 1300, 300, 'Level 3: HP = 200')
+    return_button = Button(MAIN_MENU_BUTTON_IMAGE, 800, 500, 'RETURN')
+
+    while True:
+
+        if game.level == 1:
+            level1_button.enable = False
+        else:
+            level1_button.enable = True
+        
+        if game.level == 2:
+            level2_button.enable = False
+        else:
+            level2_button.enable = True
+
+        if game.level == 3:
+            level3_button.enable = False
+        else:
+            level3_button.enable = True
+
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
+                pygame.quit()
+                sys.exit()
+
+            if event.type == MOUSEBUTTONDOWN:
+
+                if level1_button.check_for_hovering(event.pos):
+                    game.level = 1
+                    game.hero_hit_points = 400
+
+                if level2_button.check_for_hovering(event.pos):
+                    game.level = 2
+                    game.hero_hit_points = 300
+
+                if level3_button.check_for_hovering(event.pos):
+                    game.level = 3
+                    game.hero_hit_points = 200
+
+                if return_button.check_for_hovering(event.pos):
+                    return
+
+        game.screen.fill(WHITE)
+        level1_button.update(game.screen, pygame.mouse.get_pos())
+        level2_button.update(game.screen, pygame.mouse.get_pos())
+        level3_button.update(game.screen, pygame.mouse.get_pos())
+        return_button.update(game.screen, pygame.mouse.get_pos())    
+        pygame.display.update()
+
+        game.clock.tick(game.fps)
+
+def lose_menu(game: Game):
+    pass
+
+def win_menu(game: Game):
+    pass

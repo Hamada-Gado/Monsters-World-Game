@@ -88,7 +88,7 @@ each village one time.
       Village B   150 HP
       Village C   100 HP
 * When the hero steps on a mine, they
-recieve 100 HP of damage.
+receive 100 HP of damage.
 * The level of the hero:
 level       1     2     3
 HP          400   300   200

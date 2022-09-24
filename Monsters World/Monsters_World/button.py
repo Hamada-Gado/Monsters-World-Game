@@ -4,16 +4,16 @@ pygame.init()
 class Button:
     def __init__(self, image, x_pos, y_pos, text_input, font_text = "cambria", font_size = 50):
         self.font = pygame.font.SysFont(font_text, font_size)
-        self.image = image.convert_alpha()
-        self.x_pos = x_pos
-        self.y_pos = y_pos
-        self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
-        self.text_input = text_input
-        self.text = self.font.render(self.text_input, True, "white")
-        self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
-        self.color_main = 'white'
-        self.color_sub = 'green '
-        self.enable = True
+        self.image: pygame.Surface = image.convert_alpha()
+        self.x_pos: int = x_pos
+        self.y_pos: int = y_pos
+        self.rect: pygame.Rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+        self.text_input: str = text_input
+        self.text: pygame.Surface = self.font.render(self.text_input, True, "white")
+        self.text_rect: pygame.Rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
+        self.color_main: str = 'white'
+        self.color_sub: str = 'green '
+        self.enable: bool = True
 
     def update(self, screen, position):
         self.change_color(position)
