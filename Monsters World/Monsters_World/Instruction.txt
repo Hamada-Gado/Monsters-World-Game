@@ -21,9 +21,9 @@ dark demon lord, Zork!!
 The heroic battle between the hero and
 darkness starts now!
 
-<Preperations>
+<Preparations>
 * The players decide who will be the Game Master for
-this session. Using Rock, Papaer Scissors for example.
+this session. Using Rock, Paper, Scissors for example.
 * The Game Master has control over the monsters and
 Zork.
 * Before the game starts, the Game master must
@@ -58,7 +58,7 @@ he or she cannot move diagonally.
 * The hero cannot move across mountains.
 
 ------------------ Battle System ------------------
-* When step into the same square eccoupied by
+* When step into the same square occupied by
 a monster, Both the hero and Zork throw one die.
 The one who throws the highest number attacks first.
 * If both of them throw the same number, they will
@@ -67,7 +67,7 @@ tens-digit, the other the ones-digit. The number
 rolled is deducted from the opponent's HP.
 This will continue until one loses all of their
 hit points.
-* If the hero throws a double number, it wkll result
+* If the hero throws a double number, it will result
 in a critical hit. Critical hits deduct 100 HP from
 the opponent and adds 100 HP to the hero's stats!
 This does not apply to any monsters or Zork.

@@ -207,18 +207,21 @@ class Game:
 
         if self.world[self.x][self.y] == VILLAGE_A:
             self.hero_hit_points += 200
+            self.flash(GREY, GREEN)
             self.world[self.x][self.y] = ''
         elif self.world[self.x][self.y] == VILLAGE_B:
             self.hero_hit_points += 150
+            self.flash(GREY, GREEN)
             self.world[self.x][self.y] = ''
         elif self.world[self.x][self.y] == VILLAGE_C:
             self.hero_hit_points += 100
+            self.flash(GREY, GREEN)
             self.world[self.x][self.y] = ''
         elif self.world[self.x][self.y] in MONSTERS_NAMES:
             if not self.battle(self.world[self.x][self.y]):
                 return False
         elif self.world[self.x][self.y] == MINES:
-            self.damage(GREY, RED)
+            self.flash(GREY, RED)
             self.hero_hit_points -= 100
         elif self.world[self.x][self.y] == ZORK:
             self.x, self.y = 0, 9
@@ -243,6 +246,11 @@ class Game:
                 self.phase = MOVE
                 return False
             if monster_hp <= 0:
+                pygame.time.wait(1000)
+                self.throw_hero_dice()
+                damage = self.hero_dice[0]*10 + self.hero_dice[1]
+                self.hero_hit_points += damage
+                self.flash(GREY, GREEN)
                 self.map.set_alpha(255)
                 self.phase = MOVE
                 return True
@@ -251,7 +259,7 @@ class Game:
                 pygame.time.wait(1000)
                 self.throw_zork_dice()
                 damage = self.zork_dice[0]*10 + self.zork_dice[1]
-                self.damage(GREY, RED)
+                self.flash(GREY, RED)
                 self.hero_hit_points -= damage
                 turn = HERO
            
@@ -271,7 +279,7 @@ class Game:
                                 pygame.time.wait(1000)
                                 self.throw_zork_dice()
                                 damage = self.zork_dice[0]*10 + self.zork_dice[1]
-                                self.damage(GREY, RED)
+                                self.flash(GREY, RED)
                                 self.hero_hit_points -= damage
                                 turn = HERO
                             else:
@@ -279,16 +287,17 @@ class Game:
                         elif turn == HERO:
                             self.throw_hero_dice()
                             damage = self.hero_dice[0]*10 + self.hero_dice[1]
-                            self.damage(GREY, BLUE)
+                            self.flash(GREY, BLUE)
+                            monster_hp -= damage
                             if self.hero_dice[0] == self.hero_dice[1]:
+                                self.flash(GREY, GREEN)
                                 self.hero_hit_points += 100
                                 monster_hp -= 100
-                            monster_hp -= damage
                             turn = ZORK
                         elif turn == None:
                             self.throw_hero_dice()
                             self.throw_zork_dice()
-                            self.damage(BLUE, RED)
+                            self.flash(BLUE, RED)
                             damage = self.hero_dice[0]*10 + self.hero_dice[1]
                             if self.hero_dice[0] == self.hero_dice[1]:
                                 self.hero_hit_points += 100
@@ -309,8 +318,7 @@ class Game:
             pygame.display.update()
             self.clock.tick(self.fps)
 
-    def damage(self, color1, color2):
-        color1, color2 = GREY, RED
+    def flash(self, color1, color2):
         for _ in range(10):
             color1, color2 = color2, color1
             self.update(pygame.mouse.get_pos(), color1)

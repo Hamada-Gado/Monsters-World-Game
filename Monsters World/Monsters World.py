@@ -1,4 +1,4 @@
-import pygame, sys, os
+import pygame, sys
 from pygame.locals import *
 from Monsters_World.button import Button
 from Monsters_World.menus import _1P, _2P, instruction_menu, choose_level
@@ -56,5 +56,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # os.chdir(os.path.join(os.path.dirname(sys.argv[0])))
     main()
