@@ -31,6 +31,9 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 YELLOW = 'yellow'
 PURPLE = 'purple'
+ 
+SCREEN_BG = WHITE
+_1P_BG = PURPLE
 
 # Fonts
 TITLE_FONT = pygame.font.Font(None, 130)

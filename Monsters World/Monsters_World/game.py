@@ -307,6 +307,12 @@ class Game:
                             damage = self.zork_dice[0]*10 + self.zork_dice[1]
                             self.hero_hit_points -= damage
             
+
+            if monster_hp < 0:
+                monster_hp = 0
+            if self.hero_hit_points < 0:
+                self.hero_hit_points = 0
+                
             monster_hit_points_surface = GAME_FONT.render(f'HP: {monster_hp}', True, RED, WHITE)
 
             self.update(pygame.mouse.get_pos())
@@ -316,6 +322,7 @@ class Game:
             self.screen.blit(MONSTERS[monster_name]['image'], (300, 300))
             self.screen.blit(HERO_IMAGE, (550, 300))
             pygame.display.update()
+
             self.clock.tick(self.fps)
 
     def flash(self, color1, color2):
