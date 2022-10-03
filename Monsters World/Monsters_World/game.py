@@ -215,9 +215,9 @@ class Game:
             self.flash(GREY, GREEN)
             self.world[self.x][self.y] = ''
         elif self.world[self.x][self.y] in MONSTERS_NAMES:
-            self.world[self.x][self.y] = ''
             if not self.battle(self.world[self.x][self.y]):
                 return False
+            self.world[self.x][self.y] = ''
         elif self.world[self.x][self.y] == MINES:
             self.flash(GREY, RED)
             self.hero_hit_points -= 100
