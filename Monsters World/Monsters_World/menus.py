@@ -33,8 +33,6 @@ def _1P(game: Game):
         pygame.display.update()
         game.clock.tick(game.fps)
         
-
-
 def _2P(game: Game):
 
     world = MAP_IMAGE

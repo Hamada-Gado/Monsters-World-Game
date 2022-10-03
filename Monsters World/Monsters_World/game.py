@@ -143,10 +143,7 @@ class Game:
                     pygame.draw.circle(self.screen, GREY, center, Game.hero_radius)
                 elif self.world[x][y] == MINES:
                     center = self.center_coords_of_hero(x, y)
-                    pygame.draw.circle(self.screen, BLUE, center, Game.hero_radius)
-                
-                
-                
+                    pygame.draw.circle(self.screen, BLUE, center, Game.hero_radius)             
 
     def draw_hero(self, pos):
         self.hero_pos = pos
@@ -218,6 +215,7 @@ class Game:
             self.flash(GREY, GREEN)
             self.world[self.x][self.y] = ''
         elif self.world[self.x][self.y] in MONSTERS_NAMES:
+            self.world[self.x][self.y] = ''
             if not self.battle(self.world[self.x][self.y]):
                 return False
         elif self.world[self.x][self.y] == MINES:
